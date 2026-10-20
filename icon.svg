@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF0038"/>
+      <stop offset="55%" stop-color="#b91c1c"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#fecdd3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- 11st Stylized '11' & Rising Ad Chart Bars -->
+  <rect x="92" y="210" width="60" height="206" rx="16" fill="url(#bar)"/>
+  <rect x="176" y="210" width="60" height="206" rx="16" fill="url(#bar)"/>
+  <rect x="276" y="266" width="56" height="150" rx="14" fill="#fbbf24"/>
+  <rect x="356" y="176" width="56" height="240" rx="14" fill="#34d399"/>
+  <!-- Upward Optimization Arrow -->
+  <path d="M96 156 L206 116 L300 142 L404 78" fill="none" stroke="#ffffff" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="404" cy="78" r="24" fill="#fbbf24" stroke="#ffffff" stroke-width="8"/>
+</svg>

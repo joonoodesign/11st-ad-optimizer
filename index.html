@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>주누디자인 11번가 포커스클릭 & 스토어 SEO 최적화 대시보드</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="icon.svg" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="11번가최적화" />
+  <meta name="theme-color" content="#0f172a" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-hover: #26354d;
+      --border: #334155;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --primary: #ff0038;
+      --primary-dark: #d9002f;
+      --blue: #3b82f6;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --purple: #8b5cf6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Malgun Gothic", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 80px;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #ff0038, #ff5e3a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1rem;
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(255, 0, 56, 0.35);
+      flex-shrink: 0;
+    }
+    .brand h1 { font-size: 1.15rem; font-weight: 800; letter-spacing: -0.02em; }
+    .brand p { font-size: 0.78rem; color: var(--muted); }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    button, .btn {
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 13px;
+      border-radius: 8px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    button:hover, .btn:hover { background: var(--card-hover); }
+    .btn-primary { background: var(--primary); border-color: var(--primary-dark); color: #fff; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-blue { background: rgba(59,130,246,0.18); border-color: var(--blue); color: #60a5fa; }
+    .btn-green { background: rgba(16,185,129,0.16); border-color: var(--green); color: #34d399; }
+    .btn-amber { background: rgba(245,158,11,0.16); border-color: var(--amber); color: #fbbf24; }
+    .btn-sm { padding: 5px 10px; font-size: 0.76rem; border-radius: 6px; }
+    .container { max-width: 1380px; margin: 0 auto; padding: 20px; }
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+    .tab-btn {
+      padding: 11px 18px;
+      border-radius: 10px;
+      white-space: nowrap;
+      font-size: 0.9rem;
+    }
+    .tab-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(255, 0, 56, 0.3);
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+    .kpi-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-label { font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+    .kpi-value { font-size: 1.45rem; font-weight: 800; }
+    .kpi-sub { font-size: 0.78rem; color: var(--muted); margin-top: 6px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    .card-title { font-size: 1.05rem; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+    .table-wrap { overflow-x: auto; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.84rem;
+    }
+    th, td {
+      padding: 10px 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      background: rgba(15, 23, 42, 0.55);
+      white-space: nowrap;
+    }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+    tr:hover td { background: rgba(255,255,255,0.025); }
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-green { background: rgba(16,185,129,0.18); color: #34d399; }
+    .badge-amber { background: rgba(245,158,11,0.18); color: #fbbf24; }
+    .badge-red { background: rgba(239,68,68,0.18); color: #f87171; }
+    .badge-blue { background: rgba(59,130,246,0.18); color: #60a5fa; }
+    .badge-purple { background: rgba(139,92,246,0.18); color: #c084fc; }
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+    input, select, textarea {
+      background: #0f172a;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .bar-label { width: 150px; font-size: 0.83rem; font-weight: 600; flex-shrink: 0; }
+    .bar-track {
+      flex: 1;
+      height: 24px;
+      background: #0f172a;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 7px;
+      transition: width 0.3s ease;
+    }
+    .bar-val { width: 185px; text-align: right; font-size: 0.8rem; color: var(--muted); flex-shrink: 0; }
+    .check-list { display: grid; gap: 10px; }
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 0.82rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .tag-chip {
+      background: rgba(59, 130, 246, 0.13);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      color: #93c5fd;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .neg-chip {
+      background: rgba(239, 68, 68, 0.14);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .neg-chip button {
+      background: transparent;
+      border: none;
+      color: #f87171;
+      padding: 0 2px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .prod-card {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 14px;
+    }
+    .prod-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.74);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 16px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 24px;
+    }
+    .modal h2 { font-size: 1.2rem; margin-bottom: 12px; }
+    .step-box {
+      background: rgba(15, 23, 42, 0.65);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .step-box h4 { color: #60a5fa; margin-bottom: 4px; font-size: 0.92rem; }
+    .step-box p { font-size: 0.84rem; color: var(--muted); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10b981;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+      z-index: 300;
+      display: none;
+    }
+    @media (max-width: 640px) {
+      .container { padding: 12px; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .kpi-value { font-size: 1.24rem; }
+      .bar-label { width: 100px; font-size: 0.76rem; }
+      .bar-val { width: 120px; font-size: 0.75rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-logo">11st</div>
+      <div>
+        <h1>주누디자인 11번가 포커스클릭 & 스토어 SEO 최적화 대시보드</h1>
+        <p id="syncStatusText">계정: joonoodesign (23825) | 스토어: 명함무료디자인제작대구업체주누디자인 (524401)</p>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button onclick="openTutorialModal()">📖 사용법 튜토리얼</button>
+      <button class="btn-green" onclick="openSyncModal()">☁️ 클라우드 DB 연동 설정</button>
+      <label class="btn" style="cursor:pointer;">
+        📂 엑셀/CSV/JSON 업로드
+        <input type="file" id="fileUploadInput" accept=".json,.csv,.tsv,.txt" style="display:none" onchange="handleFileUpload(event)" />
+      </label>
+      <button class="btn-blue" onclick="downloadBackupJson()">💾 JSON 백업</button>
+      <button class="btn-primary" onclick="pullFromCloud(true)">🔄 동기화 새로고침</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchTab('overview', this)">📊 1. 종합 효율 & 지면 분석</button>
+      <button class="tab-btn" onclick="switchTab('seo', this)">🏷️ 2. 전 상품(8종) SEO 상품명 & 태그 관리</button>
+      <button class="tab-btn" onclick="switchTab('keywords', this)">🔍 3. 키워드 성과 & 제외키워드 센터</button>
+      <button class="tab-btn" onclick="switchTab('campaigns', this)">🎯 4. 캠페인 & 입찰 전략 관리</button>
+    </div>
+
+    <!-- TAB 1: OVERVIEW -->
+    <div id="tab-overview" class="tab-panel active">
+      <div class="kpi-grid">
+        <div class="kpi-card">
+          <div class="kpi-label">
+            <span>총 광고 가능 잔액</span>
+            <span class="badge badge-green">실시간</span>
+          </div>
+          <div class="kpi-value" id="kpiTotalBalance">60,371원</div>
+          <div class="kpi-sub" id="kpiBalanceDetail">셀러포인트 60,326원 + 셀러캐시 45원</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">
+            <span>최근 7일 노출수 / 클릭수</span>
+            <span class="badge badge-blue">10.13~10.19</span>
+          </div>
+          <div class="kpi-value" id="kpiImprClicks">1,747회 / 5클릭</div>
+          <div class="kpi-sub" id="kpiCtrCpc">평균 CTR 0.29% · 평균 CPC 147원 (총 737원)</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">
+            <span>검색 vs 추천 지면 클릭률</span>
+            <span class="badge badge-amber">핵심진단</span>
+          </div>
+          <div class="kpi-value" style="color:#34d399" id="kpiSearchVsRec">0.68% vs 0.21%</div>
+          <div class="kpi-sub">검색 지면 CTR이 추천 지면 대비 <strong>3.2배</strong> 높음</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">
+            <span>포커스클릭 운영 상품</span>
+            <span class="badge badge-green">전 상품 ON</span>
+          </div>
+          <div class="kpi-value" style="color:#60a5fa" id="kpiActiveProducts">8 / 8개 (100%)</div>
+          <div class="kpi-sub">기존 1개 → 주력 인쇄·스티커 7종 추가 완료</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">
+            <span>구매자 쿠폰 & 즉시할인</span>
+            <span class="badge badge-purple">품질지수 UP</span>
+          </div>
+          <div class="kpi-value" style="color:#fbbf24" id="kpiCouponStatus">100% 지원 ON</div>
+          <div class="kpi-sub" id="kpiCouponSub">11번가 자동쿠폰 ON + 전 상품 100원 즉시할인</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-header">
+            <div class="card-title">📉 검색 지면 vs 추천 지면 노출 편중 진단 & 최적화 비교</div>
+            <span class="badge badge-red">추천 허수 노출 83.2% 차단</span>
+          </div>
+          <p style="font-size:0.84rem; color:var(--muted); margin-bottom:14px;">
+            기존에는 검색과 추천 입찰가가 모두 <strong>200원</strong>으로 동일하여, 구매 의도가 낮은 <strong>추천(카테고리) 지면에 노출의 83.2%(1,454회)가 편중</strong>되고 정작 전환율이 높은 검색 지면에서는 11~17위로 밀려났습니다.
+          </p>
+          <div id="placementBars"></div>
+          <div class="table-wrap" style="margin-top:14px;">
+            <table>
+              <thead>
+                <tr>
+                  <th>노출 지면</th>
+                  <th class="num">노출수 (비중)</th>
+                  <th class="num">클릭수</th>
+                  <th class="num">클릭률(CTR)</th>
+                  <th class="num">평균 CPC</th>
+                  <th class="num">기존 입찰가</th>
+                  <th class="num">최적화 입찰가</th>
+                </tr>
+              </thead>
+              <tbody id="placementTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-header">
+            <div class="card-title">🎛️ 입찰가 조정 기대 효과 시뮬레이터</div>
+            <span class="badge badge-blue">검색 250원 / 추천 90원</span>
+          </div>
+          <p style="font-size:0.84rem; color:var(--muted); margin-bottom:14px;">
+            검색 입찰가와 추천 입찰가를 조절하여 주간 예상 검색 상위 노출 증가량과 허수 예산 절감 효과를 시뮬레이션합니다.
+          </p>
+          <div style="display:grid; gap:12px; margin-bottom:14px;">
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.84rem; margin-bottom:4px;">
+                <span>🔍 <strong>검색 지면 입찰가</strong> (권장: 230~280원)</span>
+                <strong style="color:#60a5fa;"><span id="simSearchVal">250</span>원</strong>
+              </div>
+              <input type="range" id="simSearchRange" min="90" max="500" step="10" value="250" oninput="runBidSimulator()" style="width:100%; padding:0;" />
+            </div>
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.84rem; margin-bottom:4px;">
+                <span>📢 <strong>추천 지면 입찰가</strong> (권장 최저가: 90원)</span>
+                <strong style="color:#fbbf24;"><span id="simRecVal">90</span>원</strong>
+              </div>
+              <input type="range" id="simRecRange" min="90" max="400" step="10" value="90" oninput="runBidSimulator()" style="width:100%; padding:0;" />
+            </div>
+          </div>
+          <div class="step-box" id="simResultBox" style="margin-bottom:0;"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">✅ 오늘(2026-10-20) 실제 적용 완료된 5대 11번가 광고·SEO 최적화 내역</div>
+          <span class="badge badge-green">100% 반영 완료</span>
+        </div>
+        <div class="check-list" id="optimizationChecklist"></div>
+      </div>
+    </div>
+
+    <!-- TAB 2: SEO PRODUCT MANAGER -->
+    <div id="tab-seo" class="tab-panel">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🏷️ 주누디자인 스토어 전 상품(8종) 11번가 맞춤 SEO 상품명 & 검색태그(20개) 관리</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn-green" onclick="copyAllSeoProducts()">📋 전체 8종 SEO 상품명+태그 일괄 복사</button>
+          </div>
+        </div>
+        <p style="font-size:0.85rem; color:var(--muted); margin-bottom:16px;">
+          11번가 검색 알고리즘과 포커스클릭 자동 키워드 매칭은 <strong>상품명 앞부분 핵심 키워드 배치 + 중복 없는 스페이스 구분 + 검색태그 20개 꽉 채우기 + 100원 이상 즉시할인/쿠폰 적용</strong> 시 품질지수가 극대화됩니다. 아래에서 상품명을 직접 수정하고 원클릭으로 복사할 수 있습니다.
+        </p>
+        <div id="seoProductList"></div>
+      </div>
+    </div>
+
+    <!-- TAB 3: KEYWORDS & NEGATIVE KEYWORDS -->
+    <div id="tab-keywords" class="tab-panel">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🚫 제외키워드(Negative Keywords) 9종 실시간 관리기 (9578004524 시트지 상품 반영 완료)</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="btn-primary btn-sm" onclick="copyNegativeKeywords()">📋 제외키워드 줄바꿈 복사 (AD OFFICE 붙여넣기용)</button>
+          </div>
+        </div>
+        <p style="font-size:0.84rem; color:var(--muted); margin-bottom:12px;">
+          실사출력 시트지 상품이 가구·인테리어·기계 검색어에 오인 노출되어 클릭률을 떨어뜨리던 9개 키워드를 AD OFFICE 제외키워드에 등록했습니다. 새로운 오인 키워드 발견 시 아래에서 즉시 추가·백업할 수 있습니다.
+        </p>
+        <div style="display:flex; gap:8px; margin-bottom:12px; flex-wrap:wrap;">
+          <input type="text" id="newNegKwInput" placeholder="추가할 제외키워드 입력 (예: 중고시트지)" style="flex:1; min-width:220px;" onkeydown="if(event.key==='Enter') addNegativeKeyword()" />
+          <button class="btn-green" onclick="addNegativeKeyword()">+ 제외키워드 추가</button>
+        </div>
+        <div id="negKwContainer" class="tag-cloud" style="gap:8px;"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🔍 최근 7일 실제 노출 키워드/지면 31개 상세 성과 분석 (<span id="kwCountSpan">31</span>개)</div>
+          <button onclick="exportKeywordsCsv()">📥 키워드 성과 CSV 다운로드</button>
+        </div>
+        <div class="filter-bar">
+          <select id="kwCategoryFilter" onchange="renderKeywordsTable()">
+            <option value="ALL">전체 키워드 및 지면 (31)</option>
+            <option value="HIGH_CTR">🔥 클릭 발생 · 고효율 검색어</option>
+            <option value="RANK_UP">⬆️ 순위 상승 필요 (10위권 밖 핵심어)</option>
+            <option value="NEGATIVE">🚫 오인 노출 · 제외키워드 등록 대상</option>
+            <option value="RECOMMEND">📢 추천/카테고리 지면 (허수 노출)</option>
+          </select>
+          <input type="text" id="kwSearchInput" placeholder="키워드명 검색..." oninput="renderKeywordsTable()" style="flex:1; min-width:200px;" />
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>구분</th>
+                <th>키워드 / 노출 지면명</th>
+                <th class="num">평균 노출순위</th>
+                <th class="num">노출수</th>
+                <th class="num">클릭수</th>
+                <th class="num">클릭률(CTR)</th>
+                <th class="num">평균 CPC</th>
+                <th class="num">총 비용</th>
+                <th>진단 및 최적화 조치</th>
+              </tr>
+            </thead>
+            <tbody id="kwTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: CAMPAIGN & BID STRATEGY -->
+    <div id="tab-campaigns" class="tab-panel">
+      <div class="grid-2">
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-header">
+            <div class="card-title">🎯 포커스클릭 그룹 입찰 전략 & 설정 관리</div>
+            <span class="badge badge-green">그룹 ID: 2879183</span>
+          </div>
+          <div style="display:grid; gap:12px;">
+            <div class="step-box" style="margin-bottom:0;">
+              <h4>현재 운영 캠페인 / 그룹</h4>
+              <p><strong>01_캠페인(간편등록)</strong> (ID: <code>615540</code>) → <strong>01_그룹</strong> (ID: <code>2879183</code>)</p>
+              <p style="margin-top:4px;">홈탭 노출 강화(추천 입찰가 150% 가산): <strong style="color:#34d399;">미적용 (OFF 유지)</strong></p>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+              <div>
+                <label style="font-size:0.8rem; color:var(--muted); display:block; margin-bottom:4px;">검색 지면 그룹 입찰가 (원)</label>
+                <input type="number" id="cfgSearchBid" value="250" step="10" min="90" style="width:100%;" />
+              </div>
+              <div>
+                <label style="font-size:0.8rem; color:var(--muted); display:block; margin-bottom:4px;">추천 지면 그룹 입찰가 (최소 90원)</label>
+                <input type="number" id="cfgRecBid" value="90" step="10" min="90" style="width:100%;" />
+              </div>
+            </div>
+            <button class="btn-primary" onclick="saveBidConfig()">💾 입찰가 설정 저장 및 클라우드 동기화</button>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:0;">
+          <div class="card-header">
+            <div class="card-title">🏆 11번가 품질지수 & 전환율 향상 점수 계산기</div>
+            <span class="badge badge-purple">실시간 진단</span>
+          </div>
+          <p style="font-size:0.83rem; color:var(--muted); margin-bottom:10px;">
+            11번가 포커스클릭은 <strong>입찰가 × 품질지수(클릭률·상품명 적합도·할인혜택)</strong>로 노출 순위를 결정합니다.
+          </p>
+          <div style="display:grid; gap:8px; margin-bottom:12px;">
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.85rem; cursor:pointer;">
+              <input type="checkbox" id="qCheckCoupon" checked onchange="calcQualityScore()" />
+              <span>구매자 쿠폰 ON (11번가 100% 비용지원 자동쿠폰 활성화) <strong>[+25점]</strong></span>
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.85rem; cursor:pointer;">
+              <input type="checkbox" id="qCheckDiscount" checked onchange="calcQualityScore()" />
+              <span>판매자 즉시할인 설정 (전 상품 100원 기본할인 배지 노출) <strong>[+20점]</strong></span>
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.85rem; cursor:pointer;">
+              <input type="checkbox" id="qCheckSeoName" checked onchange="calcQualityScore()" />
+              <span>8개 전 상품 11번가 맞춤 SEO 상품명 & 검색태그 20개 등록 <strong>[+25점]</strong></span>
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.85rem; cursor:pointer;">
+              <input type="checkbox" id="qCheckNegKw" checked onchange="calcQualityScore()" />
+              <span>오인 노출 제외키워드(Negative Keywords) 9종 필터링 적용 <strong>[+15점]</strong></span>
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; font-size:0.85rem; cursor:pointer;">
+              <input type="checkbox" id="qCheckBidSplit" checked onchange="calcQualityScore()" />
+              <span>검색(250원) / 추천(90원) 입찰가 이원화로 평균 CTR 개선 <strong>[+15점]</strong></span>
+            </label>
+          </div>
+          <div class="step-box" id="qualityScoreBox" style="margin-bottom:0;"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📋 계정 내 전체 포커스클릭 캠페인 현황 (5 / 50개)</div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>캠페인 ID</th>
+                <th>유형</th>
+                <th>캠페인명</th>
+                <th>상태</th>
+                <th class="num">등록 상품수</th>
+                <th class="num">검색 입찰가</th>
+                <th class="num">추천 입찰가</th>
+                <th>생성일시 및 비고</th>
+              </tr>
+            </thead>
+            <tbody id="campaignTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TUTORIAL MODAL -->
+  <div class="modal-backdrop" id="tutorialModal">
+    <div class="modal">
+      <h2>📖 주누디자인 11번가 광고 & SEO 최적화 대시보드 사용법</h2>
+      <p style="font-size:0.86rem; color:var(--muted); margin-bottom:16px;">
+        아이폰(iOS), 아이패드(iPadOS), PC 어디서나 24시간 무료로 작동하며 클라우드 DB와 실시간 동기화됩니다.
+      </p>
+      <div class="step-box">
+        <h4>STEP 1. 검색 vs 추천 지면 편중 진단 및 입찰가 최적화 확인</h4>
+        <p>[1. 종합 효율 & 지면 분석] 탭에서 추천 지면 허수 노출(83.2%)을 차단하기 위해 <strong>검색 입찰가 250원 상향 / 추천 입찰가 90원(최저가) 하향</strong> 조치한 전후 성과와 시뮬레이터를 확인할 수 있습니다.</p>
+      </div>
+      <div class="step-box">
+        <h4>STEP 2. 스토어 8개 전 상품 SEO 상품명 & 검색태그 20개 원클릭 복사</h4>
+        <p>[2. 전 상품 SEO 상품명 & 태그 관리] 탭에서 포커스클릭에 등록된 8개 주력 상품의 최적화 상품명과 태그 20개를 수정하거나 원클릭 복사하여 셀러오피스에 즉시 활용할 수 있습니다.</p>
+      </div>
+      <div class="step-box">
+        <h4>STEP 3. 실제 31개 노출 키워드 분석 & 제외키워드(Negative) 관리</h4>
+        <p>[3. 키워드 성과 & 제외키워드 센터] 탭에서 <code>맞춤가구</code>, <code>데코</code> 등 오인 노출을 유발하던 9개 제외키워드를 관리하고 원클릭으로 복사해 AD OFFICE에 붙여넣을 수 있습니다.</p>
+      </div>
+      <div class="step-box">
+        <h4>STEP 4. 클라우드 DB 동기화(#ghSync) & 홈 화면에 앱 설치(PWA)</h4>
+        <p>상단 [☁️ 클라우드 DB 연동 설정]에서 카카오톡 전달용 <strong>원클릭 자동 연결 링크(<code>#ghSync=...</code>)</strong>를 복사하거나 내 구글 드라이브와 연동할 수 있으며, 아이폰/아이패드 Safari 공유 버튼 → <strong>[홈 화면에 추가]</strong>로 앱처럼 설치할 수 있습니다.</p>
+      </div>
+      <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+        <button class="btn-primary" onclick="closeTutorialModal()">시작하기</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOUD SYNC MODAL -->
+  <div class="modal-backdrop" id="syncModal">
+    <div class="modal">
+      <h2>☁️ 클라우드 DB 실시간 연동 설정 (GitHub db-store & Google Drive)</h2>
+      <div class="step-box">
+        <h4>1. GitHub (db-store 브랜치) 실시간 양방향 동기화 & 카톡 원클릭 링크</h4>
+        <p style="margin-bottom:10px;">
+          GitHub Personal Access Token을 설정하면 아이폰·아이패드·PC가 <code>joonoodesign/11st-ad-optimizer</code> 저장소의 <code>db-store</code> 브랜치(<code>data.json</code>)를 실시간으로 읽고 저장합니다. (토큰은 브라우저에만 저장되며 저장소에 절대 노출되지 않습니다.)
+        </p>
+        <div style="display:grid; gap:8px;">
+          <input type="text" id="ghOwnerInput" placeholder="GitHub 계정 (기본: joonoodesign)" value="joonoodesign" />
+          <input type="text" id="ghRepoInput" placeholder="저장소 이름 (기본: 11st-ad-optimizer)" value="11st-ad-optimizer" />
+          <input type="password" id="ghTokenInput" placeholder="GitHub Personal Access Token (ghp_...)" />
+          <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;">
+            <button class="btn-primary" onclick="saveGhSyncConfig()">💾 GitHub 동기화 저장 및 즉시 업로드</button>
+            <button class="btn-amber" onclick="copyOneClickSyncUrl()">🔗 카톡 공유용 원클릭 자동연결 링크(#ghSync) 복사</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-box">
+        <h4>2. 내 구글 드라이브 (Google Drive + Apps Script) DB 연동 옵션</h4>
+        <p style="margin-bottom:10px;">
+          원하실 경우 내 구글 드라이브에도 동일한 JSON DB를 백업·조회할 수 있습니다. <code>google_drive_db.gs</code>를 배포한 웹앱 URL을 입력해 주세요.
+        </p>
+        <div style="display:grid; gap:8px;">
+          <input type="text" id="gdriveUrlInput" placeholder="https://script.google.com/macros/s/.../exec" />
+          <div style="display:flex; flex-wrap:wrap; gap:8px;">
+            <button class="btn-green" onclick="syncWithGoogleDrive()">📂 구글 드라이브 즉시 백업 전송</button>
+            <button onclick="pullFromGoogleDrive()">📥 구글 드라이브에서 불러오기</button>
+            <button onclick="copyAppsScriptCode()">📋 Apps Script 코드 복사</button>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; margin-top:14px;">
+        <button onclick="closeSyncModal()">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toastBox">복사되었습니다!</div>
+
+  <script>
+    const STORAGE_KEY = '11st_ad_optimizer_cfg_v1';
+    const DATA_CACHE_KEY = '11st_ad_optimizer_data_cache_v1';
+
+    const DEFAULT_DATA = {
+      updatedAt: '2026-10-20 16:45:00',
+      account: {
+        sellerId: 'joonoodesign',
+        sellerNo: '23825',
+        storeName: '명함무료디자인제작대구업체주누디자인',
+        storeNo: '524401',
+        totalBalance: 60371,
+        sellerPoint: 60326,
+        sellerCash: 45,
+        buyerCoupon: {
+          enabled: true,
+          name: '11번가 100% 비용지원 자동쿠폰 ON',
+          appliedAt: '2026-10-20 16:36:14',
+          sellerInstantDiscount: 100
+        }
+      },
+      summary7d: {
+        period: '2026-10-13 ~ 2026-10-19',
+        impressions: 1747,
+        clicks: 5,
+        ctr: 0.29,
+        avgCpc: 147,
+        totalCost: 737,
+        conversions: 0,
+        placements: [
+          {
+            type: '추천/카테고리 지면 (시트지/스티커)',
+            impressions: 1454,
+            sharePct: 83.2,
+            clicks: 3,
+            ctr: 0.21,
+            avgCpc: 99,
+            cost: 297,
+            oldBid: 200,
+            newBid: 90,
+            note: '허수 노출 83.2% 편중 → 최저 입찰가(90원)로 인하하여 예산 누수 차단'
+          },
+          {
+            type: '검색 결과 지면 (30개 검색어 합산)',
+            impressions: 293,
+            sharePct: 16.8,
+            clicks: 2,
+            ctr: 0.68,
+            avgCpc: 220,
+            cost: 440,
+            oldBid: 200,
+            newBid: 250,
+            note: '추천 지면 대비 CTR 3.2배 우수 → 250원 상향으로 1페이지 상위 노출 확보'
+          }
+        ]
+      },
+      appliedOptimizations: [
+        {
+          title: '1. 포커스클릭 01_그룹(2879183) 검색/추천 입찰가 이원화 완료',
+          detail: '검색 입찰가를 200원 → 250원으로 상향하여 실사출력·시트지 핵심 검색어 순위를 끌어올리고, 허수 노출(83.2%)이 발생하던 추천 입찰가를 200원 → 90원(시스템 최저가)으로 인하 및 홈탭 노출 강화 OFF 유지'
+        },
+        {
+          title: '2. 오인 노출 제외키워드(Negative Keywords) 9종 등록 완료',
+          detail: '9578004524(맞춤 실사출력 시트지) 상품에 가구·인테리어·기계 관련 오인 검색어 9종(맞춤가구, 주문제작가구, 포인트가구, deco그레이, 데코, 시티지인테리어, 스티커제작기계, 장애이해스티커주문제작, 트럭용스티커제작) 차단 완료'
+        },
+        {
+          title: '3. 누락된 주력 판매 상품 7종 포커스클릭 광고 일괄 추가 (전 상품 8종 ON)',
+          detail: '시트지 1개만 광고 중이던 상태에서 명함(2종), 전단지/배너, 카탈로그, 리뷰스티커, 취급주의스티커, 빌지/영수증 등 주력 7종을 01_그룹에 추가 등록하여 8개 전 상품 운영중(ON) 활성화'
+        },
+        {
+          title: '4. 11번가 100% 비용지원 구매자 쿠폰 ON & 전 상품 100원 즉시할인 적용',
+          detail: 'AD OFFICE 구매자 쿠폰 설정을 [사용]으로 전환(2026-10-20 16:36:14 반영)하고 셀러오피스 100원 기본 즉시할인을 결합하여 검색 결과 쿠폰/할인 배지 노출 및 품질지수 향상'
+        },
+        {
+          title: '5. 스토어 8개 전 상품 11번가 맞춤 SEO 상품명 & 검색태그 20개 최적화',
+          detail: '11번가 검색 엔진이 선호하는 핵심 키워드 전진 배치, 중복 단어 제거, 상세 규격·용도 확장 키워드 및 검색태그 20개 구성을 완비하여 자연 검색(SEO) + 포커스클릭 자동 매칭 정확도 극대화'
+        }
+      ],
+      negativeKeywords: [
+        '맞춤가구',
+        '주문제작가구',
+        '포인트가구',
+        'deco그레이',
+        '데코',
+        '시티지인테리어',
+        '스티커제작기계',
+        '장애이해스티커주문제작',
+        '트럭용스티커제작'
+      ],
+      products: [
+        {
+          productNo: '9578004524',
+          targetId: '184538751',
+          category: '문구/사무용품 > 문구용품 > 스티커',
+          price: 1000,
+          discountPrice: 900,
+          adStatus: '운영중',
+          keywordMode: '자동 + 제외키워드 9종',
+          oldName: '맞춤 실사출력 시트지 인쇄 주문제작 (유포지 합성지 PVC켈지 그레이 실내외용)',
+          newName: '맞춤 실사출력 시트지 제작 인쇄 대형 유리창 매장 방수 글자 커팅 스티커 유포지 PVC 켈지',
+          tags: ['실사출력','실사출력시트지','시트지제작','시트지인쇄','유리창시트지','매장시트지','대형스티커제작','방수시트지','글자시트지','시트지주문제작','유포지시트지','PVC시트지','그레이시트지','캘지출력','간판시트지','홍보시트지','아크릴시트지','포맥스실사','옥외광고시트지','대구실사출력']
+        },
+        {
+          productNo: '2374828642',
+          targetId: '신규등록(ON)',
+          category: '문구/사무용품 > 카드/엽서/봉투 > 명함',
+          price: 1000,
+          discountPrice: 900,
+          adStatus: '운영중',
+          keywordMode: '자동',
+          oldName: '무료디자인 명함 스티커 전단지 대구명함 주누디자인',
+          newName: '무료디자인 명함 제작 인쇄 고급지 수입지 쿠폰 명함스티커 전단지 소량 대량 주누디자인',
+          tags: ['명함제작','명함인쇄','무료디자인명함','고급명함','수입지명함','쿠폰명함','영업명함','회사명함','소량명함제작','명함주문제작','대구명함','명함디자인','심플명함','독특한명함','금박명함','카드명함','개업명함','매장쿠폰제작','스탬프쿠폰','주누디자인']
+        },
+        {
+          productNo: '2402731821',
+          targetId: '신규등록(ON)',
+          category: '문구/사무용품 > 문구용품 > 스티커',
+          price: 1000,
+          discountPrice: 900,
+          adStatus: '운영중',
+          keywordMode: '자동',
+          oldName: '명함/스티커/코팅/투명/홀로그램/도무송스티커/대구/주누디자인',
+          newName: '맞춤 스티커 제작 소량 대량 도무송 방수 투명 홀로그램 원형 사각 라벨 로고 인쇄 주누디자인',
+          tags: ['스티커제작','스티커주문제작','도무송스티커','방수스티커','투명스티커','홀로그램스티커','원형스티커','사각스티커','라벨스티커','로고스티커','코팅스티커','유포지스티커','아트지스티커','은무데드롱','소량스티커제작','포장스티커','상호스티커','제품라벨','대구스티커','주누디자인']
+        },
+        {
+          productNo: '2485520536',
+          targetId: '신규등록(ON)',
+          category: '생활/건강 > 공구/철물/산업재 > 안전/표지판',
+          price: 1000,
+          discountPrice: 900,
+          adStatus: '운영중',
+          keywordMode: '자동',
+          oldName: '맞춤 전단지 제작 종이자석 칼라봉투 배너 현수막 홍보 인쇄소',
+          newName: '맞춤 전단지 제작 인쇄 A4 16절 홍보전단지 종이자석 칼라봉투 배너 현수막 무료디자인',
+          tags: ['전단지제작','전단지인쇄','홍보전단지','A4전단지','16절전단지','학원전단지','음식점전단지','오픈전단지','종이자석스티커','자석전단지','칼라봉투제작','대봉투인쇄','소봉투인쇄','배너제작','현수막제작','입간판배너','리플렛제작','팜플렛제작','전단지소량','주누디자인']
+        },
+        {
+          productNo: '7798910249',
+          targetId: '신규등록(ON)',
+          category: '문구/사무용품 > 일반문구 > 기타문구용품',
+          price: 1000,
+          discountPrice: 900,
+          adStatus: '운영중',
+          keywordMode: '자동',
+          oldName: '카탈로그 제작 주누디자인 대구',
+          newName: '카탈로그 제작 인쇄 브로슈어 리플렛 팜플렛 회사소개서 소책자 중철 무선제본 맞춤 디자인',
+          tags: ['카탈로그제작','카달로그제작','브로슈어제작','리플렛제작','팜플렛제작','회사소개서제작','책자인쇄','소책자제작','중철제본','무선제본','홍보책자','제품카탈로그','기업브로슈어','3단리플렛','2단리플렛','접지리플렛','카탈로그디자인','대구인쇄소','인쇄주문제작','주누디자인']
+        },
+        {
+          productNo: '3352710339',
+          targetId: '신규등록(ON)',
+          category: '문구/사무용품 > 문구용품 > 스티커',
+          price: 9200,
+          discountPrice: 9100,
+          adStatus: '운영중',
+          keywordMode: '자동',
+          oldName: '리뷰스티커 1000매 감사 서비스 배달 배민 원형 제작 주누디자인',
+          newName: '배달 리뷰스티커 1000매 제작 감사 서비스 원형 사각 스티커 배민 쿠팡이츠 포장 봉투 라벨',
+          tags: ['리뷰스티커','배달스티커','감사스티커','서비스스티커','배민스티커','배달리뷰스티커','포장스티커','음식점스티커','카페스티커','원형스티커1000매','리뷰이벤트스티커','배달봉투스티커','도시락스티커','디저트스티커','하트스티커','문구스티커','소량배달스티커','가게스티커','스티커1000매','주누디자인']
+        },
+        {
+          productNo: '3529699389',
+          targetId: '신규등록(ON)',
+          category: '문구/사무용품 > 문구용품 > 스티커',
+          price: 9500,
+          discountPrice: 9400,
+          adStatus: '운영중',
+          keywordMode: '자동',
+          oldName: '취급주의 스티커 1000매 파손주의 식품 식물 주누디자인',
+          newName: '택배 취급주의 스티커 1000매 제작 파손주의 깨짐주의 신선식품 식물 포장 박스 경고 라벨',
+          tags: ['취급주의스티커','파손주의스티커','택배스티커','깨짐주의스티커','식품스티커','신선식품스티커','식물스티커','화분스티커','박스스티커','경고스티커','안내스티커','포장주의스티커','냉장보관스티커','냉동보관스티커','상하주의스티커','취급주의라벨','택배포장용품','물류스티커','스티커1000매','주누디자인']
+        },
+        {
+          productNo: '4877400502',
+          targetId: '신규등록(ON)',
+          category: '문구/사무용품 > 사무용품 > 장부/서식지',
+          price: 1000,
+          discountPrice: 900,
+          adStatus: '운영중',
+          keywordMode: '자동',
+          oldName: '빌지 영수증 양식지 거래명세서 NCR지 인쇄제작 서식지 먹지 주누디자인',
+          newName: '맞춤 빌지 영수증 제작 거래명세서 NCR지 양식지 서식지 주문서 간이영수증 무탄소 먹지 인쇄',
+          tags: ['빌지제작','영수증제작','거래명세서제작','NCR지인쇄','양식지제작','서식지인쇄','주문서제작','간이영수증제작','먹지영수증','복사영수증','2매빌지','3매거래명세서','식당빌지','매장주문서','계약서인쇄','인수증제작','전표인쇄','노트제본','대구인쇄','주누디자인']
+        }
+      ],
+      keywords31: [
+        { type: 'RECOMMEND', keyword: '시트지/스티커 (추천/카테고리 지면)', rank: 6.2, impressions: 1454, clicks: 3, ctr: 0.21, avgCpc: 99, cost: 297, action: '추천 입찰가 200원→90원 최저가 하향 완료' },
+        { type: 'HIGH_CTR', keyword: '실사출력', rank: 11.8, impressions: 6, clicks: 1, ctr: 16.67, avgCpc: 200, cost: 200, action: '고전환 핵심어! 검색 입찰가 250원 상향으로 1~5위권 진입 유도' },
+        { type: 'HIGH_CTR', keyword: '맞춤스티커제작', rank: 2.6, impressions: 3, clicks: 1, ctr: 33.33, avgCpc: 240, cost: 240, action: '최고 효율! 도무송/스티커 전용 상품(2402731821) 동시 노출 추가' },
+        { type: 'RANK_UP', keyword: '시트지', rank: 16.3, impressions: 101, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '대표 키워드 순위 열세(16.3위) → 검색 250원 상향 + SEO 상품명 강화' },
+        { type: 'RANK_UP', keyword: '실사출력시트지', rank: 3.1, impressions: 18, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '핵심 타깃 검색어! 구매자 쿠폰+100원 할인 배지로 클릭률 개선' },
+        { type: 'RANK_UP', keyword: '스티커제작', rank: 17.6, impressions: 19, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '스티커 전용 상품(2402731821) 신규 광고 등록으로 직접 매칭 완료' },
+        { type: 'RANK_UP', keyword: '주문제작스티커', rank: 11.8, impressions: 13, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '스티커 전용 상품 추가 + 검색 입찰가 250원 상향 완료' },
+        { type: 'RANK_UP', keyword: '시트지제작', rank: 2.5, impressions: 11, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '상위 노출 유지 중 → 할인/쿠폰 배지로 전환 유도' },
+        { type: 'RANK_UP', keyword: '시트지인쇄', rank: 1.9, impressions: 9, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '최상위권(1.9위) 노출 중 → 현행 유지' },
+        { type: 'RANK_UP', keyword: '글자시트지', rank: 4.1, impressions: 9, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: 'SEO 상품명에 [글자 커팅] 키워드 보강 완료' },
+        { type: 'RANK_UP', keyword: '유포지', rank: 1.6, impressions: 8, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '세부 재질 핵심어 1.6위 유지' },
+        { type: 'RANK_UP', keyword: '유리창시트지', rank: 9.8, impressions: 8, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: 'SEO 상품명 앞부분에 [유리창 매장] 배치하여 순위 상승 유도' },
+        { type: 'RANK_UP', keyword: '방수시트지', rank: 6.4, impressions: 7, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: 'SEO 상품명에 [방수] 키워드 전진 배치 완료' },
+        { type: 'RANK_UP', keyword: '매장시트지', rank: 5.2, impressions: 6, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '상위 노출 유지 및 쿠폰 혜택 적용' },
+        { type: 'RANK_UP', keyword: '대형스티커제작', rank: 4.8, impressions: 6, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: 'SEO 상품명에 [대형] 키워드 반영 완료' },
+        { type: 'RANK_UP', keyword: '시트지주문제작', rank: 2.2, impressions: 5, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '상위권(2.2위) 안정적 노출' },
+        { type: 'RANK_UP', keyword: '합성지', rank: 2.0, impressions: 4, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '재질 타깃 키워드 상위 유지' },
+        { type: 'RANK_UP', keyword: '그레이시트지', rank: 3.5, impressions: 4, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '암막/그레이시트지 수요 타깃 유지' },
+        { type: 'RANK_UP', keyword: 'pvc시트지', rank: 5.0, impressions: 4, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: 'PVC 켈지 키워드 매칭 유지' },
+        { type: 'RANK_UP', keyword: '광고시트지', rank: 3.3, impressions: 3, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '옥외/간판 광고 수요 매칭' },
+        { type: 'RANK_UP', keyword: '캘지', rank: 1.5, impressions: 2, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '전문 인쇄 재질 검색어 1.5위' },
+        { type: 'RANK_UP', keyword: '실외시트지', rank: 2.5, impressions: 2, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '실내외용 방수 시트지 매칭' },
+        { type: 'NEGATIVE', keyword: '맞춤가구', rank: 8.4, impressions: 14, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '🚫 [맞춤] 단어 오인 매칭 → 제외키워드 등록 완료' },
+        { type: 'NEGATIVE', keyword: '데코', rank: 12.1, impressions: 9, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '🚫 인테리어 소품 오인 매칭 → 제외키워드 등록 완료' },
+        { type: 'NEGATIVE', keyword: '주문제작가구', rank: 9.2, impressions: 7, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '🚫 [주문제작] 단어 오인 매칭 → 제외키워드 등록 완료' },
+        { type: 'NEGATIVE', keyword: '포인트가구', rank: 10.5, impressions: 4, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '🚫 가구 카테고리 오인 노출 → 제외키워드 등록 완료' },
+        { type: 'NEGATIVE', keyword: 'deco그레이', rank: 4.0, impressions: 3, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '🚫 타사 브랜드명 오인 노출 → 제외키워드 등록 완료' },
+        { type: 'NEGATIVE', keyword: '시티지인테리어', rank: 6.5, impressions: 3, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '🚫 인테리어 시공 오인 노출 → 제외키워드 등록 완료' },
+        { type: 'NEGATIVE', keyword: '스티커제작기계', rank: 5.0, impressions: 2, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '🚫 장비 구매자 오인 노출 → 제외키워드 등록 완료' },
+        { type: 'NEGATIVE', keyword: '트럭용스티커제작', rank: 3.0, impressions: 2, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '🚫 차량 랩핑 오인 노출 → 제외키워드 등록 완료' },
+        { type: 'NEGATIVE', keyword: '장애이해스티커주문제작', rank: 2.0, impressions: 1, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '🚫 특수 기성품 오인 노출 → 제외키워드 등록 완료' }
+      ],
+      campaigns: [
+        { id: '615540', type: 'SO(간편등록)', name: '01_캠페인(간편등록)', status: '운영중 (ON)', productCount: 8, searchBid: 250, recBid: 90, createdAt: '2026-08-26 12:33:36', note: '01_그룹(2879183) 내 스토어 전 상품 8종 통합 운영중' },
+        { id: '279510', type: '직접등록', name: 'NEW', status: '캠페인 OFF', productCount: 0, searchBid: 0, recBid: 0, createdAt: '2023-02-03 13:34:03', note: '과거 캠페인 (01_캠페인으로 일원화 완료)' },
+        { id: '190412', type: '직접등록', name: '명함', status: '캠페인 OFF', productCount: 0, searchBid: 0, recBid: 0, createdAt: '2019-04-12 10:51:49', note: '과거 캠페인 (보관)' },
+        { id: '190506', type: '직접등록', name: '스티커', status: '캠페인 OFF', productCount: 0, searchBid: 0, recBid: 0, createdAt: '2019-05-06 12:53:38', note: '과거 캠페인 (보관)' },
+        { id: '200327', type: '직접등록', name: '키워드', status: '캠페인 OFF', productCount: 0, searchBid: 0, recBid: 0, createdAt: '2020-03-27 12:25:33', note: '과거 캠페인 (보관)' }
+      ]
+    };
+
+    let appData = JSON.parse(JSON.stringify(DEFAULT_DATA));
+
+    function showToast(msg) {
+      const el = document.getElementById('toastBox');
+      el.innerText = msg;
+      el.style.display = 'block';
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => { el.style.display = 'none'; }, 2600);
+    }
+
+    function fmt(n) {
+      return Number(n ?? 0).toLocaleString('ko-KR');
+    }
+
+    function getSyncCfg() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {
+          owner: 'joonoodesign',
+          repo: '11st-ad-optimizer',
+          branch: 'db-store',
+          token: '',
+          gdriveUrl: ''
+        };
+      } catch (e) {
+        return { owner: 'joonoodesign', repo: '11st-ad-optimizer', branch: 'db-store', token: '', gdriveUrl: '' };
+      }
+    }
+
+    function saveSyncCfg(cfg) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(cfg));
+    }
+
+    function checkHashSync() {
+      if (location.hash.startsWith('#ghSync=')) {
+        try {
+          const raw = decodeURIComponent(location.hash.replace('#ghSync=', ''));
+          const parsed = JSON.parse(atob(raw));
+          const cfg = getSyncCfg();
+          Object.assign(cfg, parsed);
+          if (!cfg.repo) cfg.repo = '11st-ad-optimizer';
+          if (!cfg.branch) cfg.branch = 'db-store';
+          saveSyncCfg(cfg);
+          history.replaceState(null, '', location.pathname + location.search);
+          showToast('원클릭 클라우드 DB(#ghSync) 자동 연결이 완료되었습니다!');
+        } catch (e) {
+          console.error('Hash parse error', e);
+        }
+      }
+    }
+
+    function mergeExternalData(ext) {
+      if (!ext || typeof ext !== 'object') return;
+      if (ext.updatedAt) appData.updatedAt = ext.updatedAt;
+      if (ext.account && typeof ext.account === 'object') {
+        appData.account = Object.assign({}, appData.account, {
+          sellerId: ext.account.loginId || ext.account.sellerId || 'joonoodesign',
+          sellerNo: ext.account.sellerNo || (ext.account.sellerId === '23825' ? '23825' : '23825'),
+          storeName: ext.account.storeName || appData.account.storeName,
+          storeNo: ext.account.storeNo || appData.account.storeNo,
+          totalBalance: ext.account.totalBalance ?? appData.account.totalBalance,
+          sellerPoint: ext.account.sellerPoint ?? appData.account.sellerPoint,
+          sellerCash: ext.account.sellerCash ?? appData.account.sellerCash
+        });
+      }
+      if (Array.isArray(ext.negativeKeywords) && ext.negativeKeywords.length > 0) {
+        appData.negativeKeywords = ext.negativeKeywords;
+      }
+      if (Array.isArray(ext.optimizationsApplied) && ext.optimizationsApplied.length > 0) {
+        appData.appliedOptimizations = ext.optimizationsApplied.map((o, idx) => ({
+          title: `${idx + 1}. [${o.category || '최적화'}] ${o.title}`,
+          detail: `기존: ${o.before} → 변경: ${o.after} (${o.impact || ''})`
+        }));
+      }
+      if (Array.isArray(ext.products) && ext.products.length > 0) {
+        appData.products = ext.products.map((p, idx) => {
+          const pNo = String(p.productNo || p.prdNo || p.id || '');
+          const def = DEFAULT_DATA.products.find(d => String(d.productNo) === pNo) || DEFAULT_DATA.products[idx] || {};
+          return {
+            productNo: pNo || def.productNo || '',
+            targetId: p.targetId || def.targetId || '운영중',
+            category: p.category || def.category || '',
+            price: p.price ?? def.price ?? 1000,
+            discountPrice: p.discountPrice ?? p.finalPrice ?? def.discountPrice ?? 900,
+            adStatus: p.adStatus || p.status || def.adStatus || '운영중',
+            keywordMode: p.keywordMode || def.keywordMode || '자동',
+            oldName: p.oldName || p.originalName || def.oldName || '',
+            newName: p.newName || p.seoName || p.optimizedName || def.newName || '',
+            tags: Array.isArray(p.tags || p.searchTags) ? (p.tags || p.searchTags) : (def.tags || [])
+          };
+        });
+      }
+      if (Array.isArray(ext.keywords31 || ext.keywords) && (ext.keywords31 || ext.keywords).length > 0) {
+        const srcKws = ext.keywords31 || ext.keywords;
+        appData.keywords31 = srcKws.map(k => {
+          let mappedType = k.type || 'RANK_UP';
+          if (mappedType === '추천지면') mappedType = 'RECOMMEND';
+          else if (mappedType === '오인차단대상' || k.isNegative) mappedType = 'NEGATIVE';
+          else if (mappedType === '핵심검색') mappedType = (Number(k.clicks || 0) > 0 ? 'HIGH_CTR' : 'RANK_UP');
+          return {
+            type: mappedType,
+            keyword: k.keyword || k.name || '',
+            rank: Number(k.rank ?? k.avgRank ?? 0),
+            impressions: Number(k.impressions ?? 0),
+            clicks: Number(k.clicks ?? 0),
+            ctr: Number(k.ctr ?? 0),
+            avgCpc: Number(k.avgCpc ?? k.cpc ?? 0),
+            cost: Number(k.cost ?? 0),
+            action: k.action || k.note || '모니터링 및 입찰 최적화'
+          };
+        });
+      }
+      if (Array.isArray(ext.campaigns) && ext.campaigns.length > 0) {
+        appData.campaigns = ext.campaigns.map((c, idx) => {
+          const def = DEFAULT_DATA.campaigns[idx] || {};
+          const firstGrp = Array.isArray(c.groups) && c.groups[0] ? c.groups[0] : {};
+          return {
+            id: c.id || c.campaignId || def.id || '',
+            type: c.type || (c.campaignType === 'SO' ? 'SO(간편등록)' : (c.campaignType === 'DIRECT' ? '직접등록' : def.type)),
+            name: c.name || c.campaignName || def.name || '',
+            status: c.status || def.status || '',
+            productCount: c.productCount ?? firstGrp.productCount ?? def.productCount ?? 0,
+            searchBid: c.searchBid ?? firstGrp.searchBid ?? def.searchBid ?? 0,
+            recBid: c.recBid ?? firstGrp.recBid ?? def.recBid ?? 0,
+            createdAt: c.createdAt || def.createdAt || '',
+            note: c.note || def.note || (c.groups && c.groups.length ? `하위 그룹 ${c.groups.length}개` : '')
+          };
+        });
+      }
+      localStorage.setItem(DATA_CACHE_KEY, JSON.stringify(appData));
+    }
+
+    async function loadInitialData() {
+      checkHashSync();
+      const cfg = getSyncCfg();
+      document.getElementById('ghOwnerInput').value = cfg.owner || 'joonoodesign';
+      document.getElementById('ghRepoInput').value = cfg.repo || '11st-ad-optimizer';
+      document.getElementById('ghTokenInput').value = cfg.token || '';
+      document.getElementById('gdriveUrlInput').value = cfg.gdriveUrl || '';
+
+      try {
+        const cached = localStorage.getItem(DATA_CACHE_KEY);
+        if (cached) mergeExternalData(JSON.parse(cached));
+      } catch (e) {}
+
+      renderAll();
+
+      if (!localStorage.getItem('11st_tutorial_seen_v1')) {
+        openTutorialModal();
+        localStorage.setItem('11st_tutorial_seen_v1', '1');
+      }
+
+      await pullFromCloud(false);
+    }
+
+    async function pullFromCloud(manual) {
+      const cfg = getSyncCfg();
+      let loaded = null;
+
+      try {
+        if (cfg.token) {
+          const apiUrl = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/data.json?ref=${cfg.branch || 'db-store'}`;
+          const res = await fetch(apiUrl, {
+            headers: {
+              'Authorization': `token ${cfg.token}`,
+              'Accept': 'application/vnd.github.v3.raw'
+            },
+            cache: 'no-store'
+          });
+          if (res.ok) loaded = await res.json();
+        }
+        if (!loaded) {
+          const rawUrl = `https://raw.githubusercontent.com/${cfg.owner}/${cfg.repo}/${cfg.branch || 'db-store'}/data.json?t=${Date.now()}`;
+          const res = await fetch(rawUrl, { cache: 'no-store' });
+          if (res.ok) loaded = await res.json();
+        }
+      } catch (e) {
+        console.warn('GitHub db-store load fallback:', e);
+      }
+
+      if (!loaded) {
+        try {
+          const res = await fetch('./data.json?t=' + Date.now(), { cache: 'no-store' });
+          if (res.ok) loaded = await res.json();
+        } catch (e) {
+          console.warn('Local ./data.json fallback to DEFAULT_DATA');
+        }
+      }
+
+      if (loaded) {
+        mergeExternalData(loaded);
+        renderAll();
+        if (manual) showToast('최신 11번가 광고·SEO 데이터를 동기화했습니다!');
+      } else {
+        renderAll();
+        if (manual) showToast('내장 최신 데이터로 화면을 갱신했습니다.');
+      }
+    }
+
+    async function pushToCloud() {
+      const cfg = getSyncCfg();
+      localStorage.setItem(DATA_CACHE_KEY, JSON.stringify(appData));
+      if (!cfg.token) return false;
+      try {
+        const apiUrl = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/data.json`;
+        let sha = undefined;
+        const getRes = await fetch(`${apiUrl}?ref=${cfg.branch || 'db-store'}`, {
+          headers: { 'Authorization': `token ${cfg.token}` }
+        });
+        if (getRes.ok) {
+          const meta = await getRes.json();
+          sha = meta.sha;
+        }
+        const contentB64 = btoa(unescape(encodeURIComponent(JSON.stringify(appData, null, 2))));
+        const putRes = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${cfg.token}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            message: `Update 11st ad optimizer data (${new Date().toISOString()})`,
+            content: contentB64,
+            branch: cfg.branch || 'db-store',
+            sha
+          })
+        });
+        if (putRes.ok) {
+          document.getElementById('syncStatusText').innerText =
+            `최근 동기화: ${appData.updatedAt} (GitHub db-store 실시간 연동 완료)`;
+          return true;
+        }
+      } catch (e) {
+        console.error('Push to GitHub error', e);
+      }
+      return false;
+    }
+
+    function renderAll() {
+      const acc = appData.account || DEFAULT_DATA.account;
+      const sum = appData.summary7d || DEFAULT_DATA.summary7d;
+
+      document.getElementById('syncStatusText').innerText =
+        `기준: ${appData.updatedAt} | 계정: ${acc.sellerId} (${acc.sellerNo}) | 스토어: ${acc.storeName}`;
+
+      document.getElementById('kpiTotalBalance').innerText = `${fmt(acc.totalBalance || 60371)}원`;
+      document.getElementById('kpiBalanceDetail').innerText =
+        `셀러포인트 ${fmt(acc.sellerPoint || 60326)}원 + 셀러캐시 ${fmt(acc.sellerCash || 45)}원`;
+
+      document.getElementById('kpiImprClicks').innerText = `${fmt(sum.impressions || 1747)}회 / ${fmt(sum.clicks || 5)}클릭`;
+      document.getElementById('kpiCtrCpc').innerText =
+        `평균 CTR ${sum.ctr || 0.29}% · 평균 CPC ${fmt(sum.avgCpc || 147)}원 (총 ${fmt(sum.totalCost || 737)}원)`;
+
+      // Placement bars & table
+      const placements = sum.placements || DEFAULT_DATA.summary7d.placements;
+      document.getElementById('placementBars').innerHTML = placements.map((p, idx) => {
+        const color = idx === 0 ? 'linear-gradient(90deg, #ef4444, #f59e0b)' : 'linear-gradient(90deg, #3b82f6, #10b981)';
+        return `
+          <div class="bar-row">
+            <div class="bar-label">${idx === 0 ? '📢 추천/카테고리' : '🔍 검색 결과(30개)'}</div>
+            <div class="bar-track"><div class="bar-fill" style="width:${p.sharePct}%; background:${color};"></div></div>
+            <div class="bar-val">${fmt(p.impressions)}회 (${p.sharePct}%) · CTR ${p.ctr}%</div>
+          </div>
+        `;
+      }).join('');
+
+      document.getElementById('placementTableBody').innerHTML = placements.map((p, idx) => `
+        <tr>
+          <td><strong>${p.type}</strong></td>
+          <td class="num">${fmt(p.impressions)}회 (${p.sharePct}%)</td>
+          <td class="num">${fmt(p.clicks)}회</td>
+          <td class="num"><span class="badge ${idx === 1 ? 'badge-green' : 'badge-amber'}">${p.ctr}%</span></td>
+          <td class="num">${fmt(p.avgCpc)}원</td>
+          <td class="num" style="color:var(--muted);">${fmt(p.oldBid)}원</td>
+          <td class="num"><strong style="color:${idx === 1 ? '#60a5fa' : '#34d399'};">${fmt(p.newBid)}원</strong></td>
+        </tr>
+      `).join('');
+
+      // Checklist
+      const opts = appData.appliedOptimizations || DEFAULT_DATA.appliedOptimizations;
+      document.getElementById('optimizationChecklist').innerHTML = opts.map(o => `
+        <div class="check-item">
+          <div class="check-icon">✓</div>
+          <div>
+            <div style="font-weight:700; font-size:0.92rem; margin-bottom:3px;">${o.title}</div>
+            <div style="font-size:0.83rem; color:var(--muted);">${o.detail}</div>
+          </div>
+        </div>
+      `).join('');
+
+      runBidSimulator();
+      renderSeoProducts();
+      renderNegativeKeywords();
+      renderKeywordsTable();
+      renderCampaigns();
+      calcQualityScore();
+    }
+
+    function runBidSimulator() {
+      const sBid = Number(document.getElementById('simSearchRange').value || 250);
+      const rBid = Number(document.getElementById('simRecRange').value || 90);
+      document.getElementById('simSearchVal').innerText = fmt(sBid);
+      document.getElementById('simRecVal').innerText = fmt(rBid);
+
+      const estSearchShare = Math.min(82, Math.max(20, Math.round((sBid / (sBid + rBid * 1.2)) * 100)));
+      const estRecShare = 100 - estSearchShare;
+      const estRank = sBid >= 250 ? '3~6위권 (1페이지 상단)' : (sBid >= 200 ? '11~16위권 (중하단)' : '15위권 밖');
+      const estCtr = (0.21 * (estRecShare / 100) + 0.85 * (estSearchShare / 100)).toFixed(2);
+
+      document.getElementById('simResultBox').innerHTML = `
+        <h4>📊 시뮬레이션 결과 (검색 ${fmt(sBid)}원 / 추천 ${fmt(rBid)}원 + 8개 전 상품 운영 기준)</h4>
+        <p style="margin-top:4px;">• 예상 노출 비중 변화: <strong>검색 지면 약 ${estSearchShare}%</strong> vs 추천 지면 약 ${estRecShare}% (기존 검색 16.8%에서 대폭 개선)</p>
+        <p>• 핵심 키워드(<code>실사출력</code>, <code>시트지</code>, <code>명함제작</code>) 예상 평균 순위: <strong style="color:#34d399;">${estRank}</strong></p>
+        <p>• 예상 평균 클릭률(CTR): <strong>0.29% → 약 ${estCtr}%</strong> (구매 의도 높은 검색 유입 집중)</p>
+      `;
+    }
+
+    function renderSeoProducts() {
+      const container = document.getElementById('seoProductList');
+      const prods = appData.products || DEFAULT_DATA.products;
+      container.innerHTML = prods.map((p, idx) => `
+        <div class="prod-card">
+          <div class="prod-top">
+            <div>
+              <span class="badge badge-green">${p.adStatus || '운영중'}</span>
+              <span class="badge badge-blue">상품번호: ${p.productNo}</span>
+              <span class="badge badge-purple">즉시할인 100원 + 구매자쿠폰 ON</span>
+              <span style="font-size:0.8rem; color:var(--muted); margin-left:6px;">${p.category} | 판매가 ${fmt(p.price)}원 (할인가 ${fmt(p.discountPrice)}원)</span>
+            </div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <button class="btn-sm btn-primary" onclick="copyProductSeoName(${idx})">📋 SEO 상품명 복사</button>
+              <button class="btn-sm btn-blue" onclick="copyProductTags(${idx})">🏷️ 검색태그 20개 복사</button>
+              <button class="btn-sm btn-green" onclick="saveProductSeoEdit(${idx})">💾 수정 저장</button>
+            </div>
+          </div>
+          <div style="font-size:0.8rem; color:var(--muted); margin-bottom:6px;">
+            기존 상품명: <span style="text-decoration:line-through;">${p.oldName}</span>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center; margin-bottom:8px;">
+            <input type="text" id="seoNameInput_${idx}" value="${p.newName.replace(/"/g, '&quot;')}" style="flex:1; font-weight:700; color:#34d399; border-color:rgba(16,185,129,0.4);" />
+            <span style="font-size:0.78rem; color:var(--muted); white-space:nowrap;">${p.newName.length}자 / 50자</span>
+          </div>
+          <div style="font-size:0.78rem; color:var(--muted);">추천 검색태그 (${(p.tags || []).length}개):</div>
+          <div class="tag-cloud">
+            ${(p.tags || []).map(t => `<span class="tag-chip">#${t}</span>`).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function copyProductSeoName(idx) {
+      const val = document.getElementById(`seoNameInput_${idx}`).value.trim();
+      navigator.clipboard.writeText(val);
+      showToast(`상품번호 ${appData.products[idx].productNo}의 SEO 상품명이 복사되었습니다!`);
+    }
+
+    function copyProductTags(idx) {
+      const tags = (appData.products[idx].tags || []).join(',');
+      navigator.clipboard.writeText(tags);
+      showToast(`검색태그 20개가 쉼표(,) 구분으로 복사되었습니다!`);
+    }
+
+    async function saveProductSeoEdit(idx) {
+      const val = document.getElementById(`seoNameInput_${idx}`).value.trim();
+      if (!val) return alert('상품명을 입력해 주세요.');
+      appData.products[idx].newName = val;
+      appData.updatedAt = new Date().toISOString().replace('T', ' ').slice(0, 19);
+      renderSeoProducts();
+      await pushToCloud();
+      showToast('SEO 상품명 수정사항이 저장되었습니다!');
+    }
+
+    function copyAllSeoProducts() {
+      const lines = (appData.products || []).map(p =>
+        `[상품번호: ${p.productNo}]\n- 기존 상품명: ${p.oldName}\n- 최적화 SEO 상품명: ${p.newName}\n- 검색태그(20개): ${(p.tags || []).join(', ')}`
+      ).join('\n\n');
+      navigator.clipboard.writeText(lines);
+      showToast('8개 전 상품 SEO 상품명과 태그 20개 목록이 복사되었습니다!');
+    }
+
+    function renderNegativeKeywords() {
+      const box = document.getElementById('negKwContainer');
+      const list = appData.negativeKeywords || [];
+      box.innerHTML = list.map((kw, idx) => `
+        <span class="neg-chip">
+          🚫 ${kw}
+          <button title="삭제" onclick="removeNegativeKeyword(${idx})">×</button>
+        </span>
+      `).join('');
+    }
+
+    async function addNegativeKeyword() {
+      const inp = document.getElementById('newNegKwInput');
+      const val = (inp.value || '').trim();
+      if (!val) return;
+      if (!appData.negativeKeywords.includes(val)) {
+        appData.negativeKeywords.push(val);
+        appData.updatedAt = new Date().toISOString().replace('T', ' ').slice(0, 19);
+        inp.value = '';
+        renderNegativeKeywords();
+        await pushToCloud();
+        showToast(`제외키워드 '${val}' 추가 완료!`);
+      } else {
+        showToast('이미 등록된 제외키워드입니다.');
+      }
+    }
+
+    async function removeNegativeKeyword(idx) {
+      const removed = appData.negativeKeywords.splice(idx, 1);
+      appData.updatedAt = new Date().toISOString().replace('T', ' ').slice(0, 19);
+      renderNegativeKeywords();
+      await pushToCloud();
+      showToast(`제외키워드 '${removed}' 삭제됨`);
+    }
+
+    function copyNegativeKeywords() {
+      const text = (appData.negativeKeywords || []).join('\n');
+      navigator.clipboard.writeText(text);
+      showToast(`제외키워드 ${appData.negativeKeywords.length}종이 줄바꿈 형태로 복사되었습니다!`);
+    }
+
+    function renderKeywordsTable() {
+      const cat = document.getElementById('kwCategoryFilter').value;
+      const q = (document.getElementById('kwSearchInput').value || '').trim().toLowerCase();
+      const all = appData.keywords31 || DEFAULT_DATA.keywords31;
+
+      const filtered = all.filter(k => {
+        if (cat !== 'ALL' && k.type !== cat) return false;
+        if (q && !String(k.keyword).toLowerCase().includes(q)) return false;
+        return true;
+      });
+
+      document.getElementById('kwCountSpan').innerText = fmt(filtered.length);
+      document.getElementById('kwTableBody').innerHTML = filtered.map(k => {
+        let badge = '<span class="badge badge-blue">검색어</span>';
+        if (k.type === 'HIGH_CTR') badge = '<span class="badge badge-green">고효율 핵심</span>';
+        else if (k.type === 'NEGATIVE') badge = '<span class="badge badge-red">제외키워드 차단</span>';
+        else if (k.type === 'RECOMMEND') badge = '<span class="badge badge-amber">추천지면</span>';
+
+        return `
+          <tr>
+            <td>${badge}</td>
+            <td><strong>${k.keyword}</strong></td>
+            <td class="num">${k.rank ? k.rank.toFixed(1) + '위' : '-'}</td>
+            <td class="num">${fmt(k.impressions)}</td>
+            <td class="num"><strong>${fmt(k.clicks)}</strong></td>
+            <td class="num" style="color:${k.ctr >= 5 ? '#34d399' : 'inherit'}; font-weight:${k.ctr > 0 ? '700' : '400'};">${k.ctr}%</td>
+            <td class="num">${k.avgCpc > 0 ? fmt(k.avgCpc) + '원' : '-'}</td>
+            <td class="num">${k.cost > 0 ? fmt(k.cost) + '원' : '-'}</td>
+            <td style="font-size:0.8rem; color:var(--muted);">${k.action}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function renderCampaigns() {
+      const camps = appData.campaigns || DEFAULT_DATA.campaigns;
+      document.getElementById('campaignTableBody').innerHTML = camps.map((c, idx) => `
+        <tr>
+          <td><code>${c.id}</code></td>
+          <td>${c.type}</td>
+          <td><strong>${c.name}</strong></td>
+          <td><span class="badge ${idx === 0 ? 'badge-green' : 'badge-amber'}">${c.status}</span></td>
+          <td class="num"><strong>${fmt(c.productCount)}개</strong></td>
+          <td class="num">${c.searchBid ? fmt(c.searchBid) + '원' : '-'}</td>
+          <td class="num">${c.recBid ? fmt(c.recBid) + '원' : '-'}</td>
+          <td style="font-size:0.8rem; color:var(--muted);">${c.createdAt} · ${c.note || ''}</td>
+        </tr>
+      `).join('');
+    }
+
+    async function saveBidConfig() {
+      const sBid = Number(document.getElementById('cfgSearchBid').value || 250);
+      const rBid = Math.max(90, Number(document.getElementById('cfgRecBid').value || 90));
+      document.getElementById('cfgRecBid').value = rBid;
+
+      if (appData.campaigns && appData.campaigns[0]) {
+        appData.campaigns[0].searchBid = sBid;
+        appData.campaigns[0].recBid = rBid;
+      }
+      if (appData.summary7d && appData.summary7d.placements) {
+        appData.summary7d.placements[0].newBid = rBid;
+        appData.summary7d.placements[1].newBid = sBid;
+      }
+      document.getElementById('simSearchRange').value = sBid;
+      document.getElementById('simRecRange').value = rBid;
+      appData.updatedAt = new Date().toISOString().replace('T', ' ').slice(0, 19);
+      renderAll();
+      await pushToCloud();
+      showToast(`그룹 입찰가(검색 ${sBid}원 / 추천 ${rBid}원) 설정이 저장되었습니다!`);
+    }
+
+    function calcQualityScore() {
+      let score = 0;
+      if (document.getElementById('qCheckCoupon')?.checked) score += 25;
+      if (document.getElementById('qCheckDiscount')?.checked) score += 20;
+      if (document.getElementById('qCheckSeoName')?.checked) score += 25;
+      if (document.getElementById('qCheckNegKw')?.checked) score += 15;
+      if (document.getElementById('qCheckBidSplit')?.checked) score += 15;
+
+      const grade = score >= 90 ? 'S등급 (최상위 노출 최적화 완료)' : (score >= 70 ? 'A등급 (양호)' : 'B등급 (추가 보완 권장)');
+      document.getElementById('qualityScoreBox').innerHTML = `
+        <h4>현재 주누디자인 11번가 스토어 품질지수 진단: <span style="color:#34d399;">${score}점 / 100점 (${grade})</span></h4>
+        <p style="margin-top:4px;">구매자 쿠폰(11번가 100% 지원) + 100원 즉시할인 + 제외키워드 9종 + 검색 250원/추천 90원 이원화가 모두 반영되어 동일 입찰가 대비 최고 효율로 노출됩니다.</p>
+      `;
+    }
+
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function openTutorialModal() { document.getElementById('tutorialModal').classList.add('open'); }
+    function closeTutorialModal() { document.getElementById('tutorialModal').classList.remove('open'); }
+    function openSyncModal() { document.getElementById('syncModal').classList.add('open'); }
+    function closeSyncModal() { document.getElementById('syncModal').classList.remove('open'); }
+
+    async function saveGhSyncConfig() {
+      const cfg = getSyncCfg();
+      cfg.owner = document.getElementById('ghOwnerInput').value.trim() || 'joonoodesign';
+      cfg.repo = document.getElementById('ghRepoInput').value.trim() || '11st-ad-optimizer';
+      cfg.token = document.getElementById('ghTokenInput').value.trim();
+      cfg.gdriveUrl = document.getElementById('gdriveUrlInput').value.trim();
+      saveSyncCfg(cfg);
+      const ok = await pushToCloud();
+      showToast(ok ? 'GitHub db-store 실시간 동기화 및 업로드 완료!' : '동기화 설정이 브라우저에 저장되었습니다.');
+    }
+
+    function copyOneClickSyncUrl() {
+      const cfg = getSyncCfg();
+      cfg.owner = document.getElementById('ghOwnerInput').value.trim() || 'joonoodesign';
+      cfg.repo = document.getElementById('ghRepoInput').value.trim() || '11st-ad-optimizer';
+      cfg.token = document.getElementById('ghTokenInput').value.trim();
+      saveSyncCfg(cfg);
+      const hashPayload = btoa(JSON.stringify({
+        owner: cfg.owner,
+        repo: cfg.repo,
+        branch: 'db-store',
+        token: cfg.token
+      }));
+      const url = `${location.origin}${location.pathname}#ghSync=${encodeURIComponent(hashPayload)}`;
+      navigator.clipboard.writeText(url);
+      alert('카톡 전달용 원클릭 자동 연결 링크(#ghSync=...)가 복사되었습니다!\n아이폰·아이패드·PC 어디서든 이 링크만 열면 토큰 입력 없이 즉시 실시간 DB에 연결됩니다.');
+    }
+
+    async function syncWithGoogleDrive() {
+      const url = document.getElementById('gdriveUrlInput').value.trim();
+      if (!url) return alert('Google Apps Script 웹앱 배포 URL을 입력해 주세요.');
+      const cfg = getSyncCfg();
+      cfg.gdriveUrl = url;
+      saveSyncCfg(cfg);
+      try {
+        await fetch(url, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(appData)
+        });
+        showToast('내 구글 드라이브로 DB 백업 전송을 완료했습니다!');
+      } catch (e) {
+        alert('구글 드라이브 연동 오류: ' + e.message);
+      }
+    }
+
+    async function pullFromGoogleDrive() {
+      const url = document.getElementById('gdriveUrlInput').value.trim();
+      if (!url) return alert('Google Apps Script 웹앱 배포 URL을 입력해 주세요.');
+      try {
+        const res = await fetch(url);
+        if (res.ok) {
+          const data = await res.json();
+          mergeExternalData(data);
+          renderAll();
+          showToast('구글 드라이브에서 최신 DB를 불러왔습니다!');
+        }
+      } catch (e) {
+        alert('구글 드라이브 불러오기 실패: ' + e.message);
+      }
+    }
+
+    function copyAppsScriptCode() {
+      const code = `function doPost(e) {
+  var folder = DriveApp.getRootFolder();
+  var files = folder.getFilesByName('11st_ad_optimizer_db.json');
+  var content = e.postData.contents;
+  if (files.hasNext()) {
+    files.next().setContent(content);
+  } else {
+    folder.createFile('11st_ad_optimizer_db.json', content, MimeType.PLAIN_TEXT);
+  }
+  return ContentService.createTextOutput(JSON.stringify({status: 'ok'})).setMimeType(ContentService.MimeType.JSON);
+}
+function doGet() {
+  var files = DriveApp.getRootFolder().getFilesByName('11st_ad_optimizer_db.json');
+  var content = files.hasNext() ? files.next().getBlob().getDataAsString() : '{}';
+  return ContentService.createTextOutput(content).setMimeType(ContentService.MimeType.JSON);
+}`;
+      navigator.clipboard.writeText(code);
+      showToast('구글 드라이브 연동용 Apps Script 코드가 복사되었습니다!');
+    }
+
+    function downloadBackupJson() {
+      const blob = new Blob([JSON.stringify(appData, null, 2)], { type: 'application/json;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `11st_ad_optimizer_backup_${new Date().toISOString().slice(0,10)}.json`;
+      a.click();
+    }
+
+    function exportKeywordsCsv() {
+      const rows = [
+        ['구분', '키워드/노출지면', '평균노출순위', '노출수', '클릭수', '클릭률(%)', '평균CPC(원)', '총비용(원)', '진단 및 조치']
+      ];
+      for (const k of (appData.keywords31 || [])) {
+        rows.push([k.type, k.keyword, k.rank, k.impressions, k.clicks, k.ctr, k.avgCpc, k.cost, k.action]);
+      }
+      const csv = '\uFEFF' + rows.map(r => r.map(v => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `11st_focusclick_keywords_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+    }
+
+    function handleFileUpload(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        const text = e.target.result;
+        try {
+          if (file.name.endsWith('.json')) {
+            const parsed = JSON.parse(text);
+            mergeExternalData(parsed);
+            renderAll();
+            await pushToCloud();
+            showToast('JSON 데이터 업로드 및 반영 완료!');
+          } else {
+            const lines = text.split(/\r?\n/).filter(l => l.trim());
+            const newKws = [];
+            for (let i = 1; i < lines.length; i++) {
+              const cols = lines[i].split(/,|\t/).map(c => c.replace(/^"|"$/g, '').trim());
+              if (cols.length >= 4) {
+                newKws.push({
+                  type: Number(cols[4] || 0) > 0 ? 'HIGH_CTR' : 'RANK_UP',
+                  keyword: cols[1] || cols[0],
+                  rank: parseFloat(cols[2]) || 0,
+                  impressions: parseInt(cols[3].replace(/,/g, '')) || 0,
+                  clicks: parseInt((cols[4] || '0').replace(/,/g, '')) || 0,
+                  ctr: parseFloat(cols[5]) || 0,
+                  avgCpc: parseInt((cols[6] || '0').replace(/,/g, '')) || 0,
+                  cost: parseInt((cols[7] || '0').replace(/,/g, '')) || 0,
+                  action: cols[8] || '업로드 리포트 반영'
+                });
+              }
+            }
+            if (newKws.length > 0) {
+              appData.keywords31 = newKws;
+              appData.updatedAt = new Date().toISOString().replace('T', ' ').slice(0, 19);
+              renderAll();
+              await pushToCloud();
+              showToast(`CSV 리포트 키워드 ${newKws.length}개 반영 완료!`);
+            } else {
+              alert('유효한 키워드 행을 찾지 못했습니다.');
+            }
+          }
+        } catch (err) {
+          alert('파일 파싱 중 오류가 발생했습니다: ' + err.message);
+        }
+      };
+      reader.readAsText(file, 'utf-8');
+    }
+
+    window.addEventListener('DOMContentLoaded', loadInitialData);
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "주누디자인 11번가 광고 효율 분석 & 최적화 대시보드",
+  "short_name": "11번가광고최적화",
+  "description": "11번가 포커스클릭 광고 성과, 지면별 입찰가, 제외키워드 및 전 상품 SEO 최적화 통합 관리 웹앱",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#FF0038",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
