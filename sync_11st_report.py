@@ -188,8 +188,8 @@ def main():
         "totalBalance": 60371,
         "sellerPoint": 60326,
         "sellerCash": 45,
-        "buyerCoupon": "사용 (11번가 100% 비용지원 자동쿠폰 ON)",
-        "couponUpdatedAt": "2026-10-20 16:36:21"
+        "buyerCoupon": "할인 미적용 (1,000원 단가 수량 결제 방식 유지)",
+        "couponUpdatedAt": "2026-10-20 17:17:14"
     })
 
     # 실시간 포인트/캐시 잔액 파싱

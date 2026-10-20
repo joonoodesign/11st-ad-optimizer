@@ -423,11 +423,11 @@
         </div>
         <div class="kpi-card">
           <div class="kpi-label">
-            <span>구매자 쿠폰 & 즉시할인</span>
-            <span class="badge badge-purple">품질지수 UP</span>
+            <span>단가/결제방식 & 할인설정</span>
+            <span class="badge badge-purple">견적결제 보호</span>
           </div>
-          <div class="kpi-value" style="color:#fbbf24" id="kpiCouponStatus">100% 지원 ON</div>
-          <div class="kpi-sub" id="kpiCouponSub">11번가 자동쿠폰 ON + 전 상품 100원 즉시할인</div>
+          <div class="kpi-value" style="color:#fbbf24" id="kpiCouponStatus">할인 미적용</div>
+          <div class="kpi-sub" id="kpiCouponSub">할인 미적용 (1,000원 단가 수량 결제 방식 유지)</div>
         </div>
       </div>
 
@@ -506,7 +506,7 @@
           </div>
         </div>
         <p style="font-size:0.85rem; color:var(--muted); margin-bottom:16px;">
-          11번가 검색 알고리즘과 포커스클릭 자동 키워드 매칭은 <strong>상품명 앞부분 핵심 키워드 배치 + 중복 없는 스페이스 구분 + 검색태그 20개 꽉 채우기 + 100원 이상 즉시할인/쿠폰 적용</strong> 시 품질지수가 극대화됩니다. 아래에서 상품명을 직접 수정하고 원클릭으로 복사할 수 있습니다.
+          11번가 검색 알고리즘과 포커스클릭 자동 키워드 매칭은 <strong>상품명 앞부분 핵심 키워드 배치 + 중복 없는 스페이스 구분 + 검색태그 20개 꽉 채우기 + 견적 결제용 정가(1,000원 단가) 유지</strong> 시 품질지수가 극대화됩니다. 아래에서 상품명을 직접 수정하고 원클릭으로 복사할 수 있습니다.
         </p>
         <div id="seoProductList"></div>
       </div>
@@ -606,11 +606,11 @@
           <div style="display:grid; gap:8px; margin-bottom:12px;">
             <label style="display:flex; align-items:center; gap:8px; font-size:0.85rem; cursor:pointer;">
               <input type="checkbox" id="qCheckCoupon" checked onchange="calcQualityScore()" />
-              <span>구매자 쿠폰 ON (11번가 100% 비용지원 자동쿠폰 활성화) <strong>[+25점]</strong></span>
+              <span>맞춤 인쇄 견적 결제 보호 (구매자 쿠폰 OFF · 1,000원 단가 수량 결제 유지) <strong>[+25점]</strong></span>
             </label>
             <label style="display:flex; align-items:center; gap:8px; font-size:0.85rem; cursor:pointer;">
               <input type="checkbox" id="qCheckDiscount" checked onchange="calcQualityScore()" />
-              <span>판매자 즉시할인 설정 (전 상품 100원 기본할인 배지 노출) <strong>[+20점]</strong></span>
+              <span>포커스클릭 주력 8개 전 상품 광고 등록 및 운영중(ON) 활성화 <strong>[+20점]</strong></span>
             </label>
             <label style="display:flex; align-items:center; gap:8px; font-size:0.85rem; cursor:pointer;">
               <input type="checkbox" id="qCheckSeoName" checked onchange="calcQualityScore()" />
@@ -731,7 +731,7 @@
     const DATA_CACHE_KEY = '11st_ad_optimizer_data_cache_v1';
 
     const DEFAULT_DATA = {
-      updatedAt: '2026-10-20 16:45:00',
+      updatedAt: '2026-10-20 17:17:14',
       account: {
         sellerId: 'joonoodesign',
         sellerNo: '23825',
@@ -741,10 +741,10 @@
         sellerPoint: 60326,
         sellerCash: 45,
         buyerCoupon: {
-          enabled: true,
-          name: '11번가 100% 비용지원 자동쿠폰 ON',
-          appliedAt: '2026-10-20 16:36:14',
-          sellerInstantDiscount: 100
+          enabled: false,
+          name: '할인 미적용 (1,000원 단가 수량 결제 방식 유지)',
+          appliedAt: '2026-10-20 17:17:14',
+          sellerInstantDiscount: 0
         }
       },
       summary7d: {
@@ -796,8 +796,8 @@
           detail: '시트지 1개만 광고 중이던 상태에서 명함(2종), 전단지/배너, 카탈로그, 리뷰스티커, 취급주의스티커, 빌지/영수증 등 주력 7종을 01_그룹에 추가 등록하여 8개 전 상품 운영중(ON) 활성화'
         },
         {
-          title: '4. 11번가 100% 비용지원 구매자 쿠폰 ON & 전 상품 100원 즉시할인 적용',
-          detail: 'AD OFFICE 구매자 쿠폰 설정을 [사용]으로 전환(2026-10-20 16:36:14 반영)하고 셀러오피스 100원 기본 즉시할인을 결합하여 검색 결과 쿠폰/할인 배지 노출 및 품질지수 향상'
+          title: '4. 견적 수량 결제 방식 보호를 위해 구매자 쿠폰 및 금액 할인 미적용(OFF) 유지',
+          detail: '1,000원 단위 수량 조절로 견적 금액에 맞춰 결제하는 스토어 특성에 맞춰 AD OFFICE 구매자 쿠폰을 [사용 안 함]으로 설정(2026-10-20 17:17:14 반영)하고 전 상품 정가(할인 미적용) 유지'
         },
         {
           title: '5. 스토어 8개 전 상품 11번가 맞춤 SEO 상품명 & 검색태그 20개 최적화',
@@ -821,7 +821,8 @@
           targetId: '184538751',
           category: '문구/사무용품 > 문구용품 > 스티커',
           price: 1000,
-          discountPrice: 900,
+          discountPrice: 1000,
+          sellerDiscount: 0,
           adStatus: '운영중',
           keywordMode: '자동 + 제외키워드 9종',
           oldName: '맞춤 실사출력 시트지 인쇄 주문제작 (유포지 합성지 PVC켈지 그레이 실내외용)',
@@ -833,7 +834,8 @@
           targetId: '신규등록(ON)',
           category: '문구/사무용품 > 카드/엽서/봉투 > 명함',
           price: 1000,
-          discountPrice: 900,
+          discountPrice: 1000,
+          sellerDiscount: 0,
           adStatus: '운영중',
           keywordMode: '자동',
           oldName: '무료디자인 명함 스티커 전단지 대구명함 주누디자인',
@@ -845,7 +847,8 @@
           targetId: '신규등록(ON)',
           category: '문구/사무용품 > 문구용품 > 스티커',
           price: 1000,
-          discountPrice: 900,
+          discountPrice: 1000,
+          sellerDiscount: 0,
           adStatus: '운영중',
           keywordMode: '자동',
           oldName: '명함/스티커/코팅/투명/홀로그램/도무송스티커/대구/주누디자인',
@@ -857,7 +860,8 @@
           targetId: '신규등록(ON)',
           category: '생활/건강 > 공구/철물/산업재 > 안전/표지판',
           price: 1000,
-          discountPrice: 900,
+          discountPrice: 1000,
+          sellerDiscount: 0,
           adStatus: '운영중',
           keywordMode: '자동',
           oldName: '맞춤 전단지 제작 종이자석 칼라봉투 배너 현수막 홍보 인쇄소',
@@ -869,7 +873,8 @@
           targetId: '신규등록(ON)',
           category: '문구/사무용품 > 일반문구 > 기타문구용품',
           price: 1000,
-          discountPrice: 900,
+          discountPrice: 1000,
+          sellerDiscount: 0,
           adStatus: '운영중',
           keywordMode: '자동',
           oldName: '카탈로그 제작 주누디자인 대구',
@@ -881,7 +886,8 @@
           targetId: '신규등록(ON)',
           category: '문구/사무용품 > 문구용품 > 스티커',
           price: 9200,
-          discountPrice: 9100,
+          discountPrice: 9200,
+          sellerDiscount: 0,
           adStatus: '운영중',
           keywordMode: '자동',
           oldName: '리뷰스티커 1000매 감사 서비스 배달 배민 원형 제작 주누디자인',
@@ -893,7 +899,8 @@
           targetId: '신규등록(ON)',
           category: '문구/사무용품 > 문구용품 > 스티커',
           price: 9500,
-          discountPrice: 9400,
+          discountPrice: 9500,
+          sellerDiscount: 0,
           adStatus: '운영중',
           keywordMode: '자동',
           oldName: '취급주의 스티커 1000매 파손주의 식품 식물 주누디자인',
@@ -905,7 +912,8 @@
           targetId: '신규등록(ON)',
           category: '문구/사무용품 > 사무용품 > 장부/서식지',
           price: 1000,
-          discountPrice: 900,
+          discountPrice: 1000,
+          sellerDiscount: 0,
           adStatus: '운영중',
           keywordMode: '자동',
           oldName: '빌지 영수증 양식지 거래명세서 NCR지 인쇄제작 서식지 먹지 주누디자인',
@@ -918,16 +926,16 @@
         { type: 'HIGH_CTR', keyword: '실사출력', rank: 11.8, impressions: 6, clicks: 1, ctr: 16.67, avgCpc: 200, cost: 200, action: '고전환 핵심어! 검색 입찰가 250원 상향으로 1~5위권 진입 유도' },
         { type: 'HIGH_CTR', keyword: '맞춤스티커제작', rank: 2.6, impressions: 3, clicks: 1, ctr: 33.33, avgCpc: 240, cost: 240, action: '최고 효율! 도무송/스티커 전용 상품(2402731821) 동시 노출 추가' },
         { type: 'RANK_UP', keyword: '시트지', rank: 16.3, impressions: 101, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '대표 키워드 순위 열세(16.3위) → 검색 250원 상향 + SEO 상품명 강화' },
-        { type: 'RANK_UP', keyword: '실사출력시트지', rank: 3.1, impressions: 18, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '핵심 타깃 검색어! 구매자 쿠폰+100원 할인 배지로 클릭률 개선' },
+        { type: 'RANK_UP', keyword: '실사출력시트지', rank: 3.1, impressions: 18, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '핵심 타깃 검색어! SEO 상품명 및 검색태그 20개 일치도로 클릭률 개선' },
         { type: 'RANK_UP', keyword: '스티커제작', rank: 17.6, impressions: 19, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '스티커 전용 상품(2402731821) 신규 광고 등록으로 직접 매칭 완료' },
         { type: 'RANK_UP', keyword: '주문제작스티커', rank: 11.8, impressions: 13, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '스티커 전용 상품 추가 + 검색 입찰가 250원 상향 완료' },
-        { type: 'RANK_UP', keyword: '시트지제작', rank: 2.5, impressions: 11, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '상위 노출 유지 중 → 할인/쿠폰 배지로 전환 유도' },
+        { type: 'RANK_UP', keyword: '시트지제작', rank: 2.5, impressions: 11, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '상위 노출 유지 중 → SEO 상품명 최적화로 전환 유도' },
         { type: 'RANK_UP', keyword: '시트지인쇄', rank: 1.9, impressions: 9, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '최상위권(1.9위) 노출 중 → 현행 유지' },
         { type: 'RANK_UP', keyword: '글자시트지', rank: 4.1, impressions: 9, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: 'SEO 상품명에 [글자 커팅] 키워드 보강 완료' },
         { type: 'RANK_UP', keyword: '유포지', rank: 1.6, impressions: 8, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '세부 재질 핵심어 1.6위 유지' },
         { type: 'RANK_UP', keyword: '유리창시트지', rank: 9.8, impressions: 8, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: 'SEO 상품명 앞부분에 [유리창 매장] 배치하여 순위 상승 유도' },
         { type: 'RANK_UP', keyword: '방수시트지', rank: 6.4, impressions: 7, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: 'SEO 상품명에 [방수] 키워드 전진 배치 완료' },
-        { type: 'RANK_UP', keyword: '매장시트지', rank: 5.2, impressions: 6, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '상위 노출 유지 및 쿠폰 혜택 적용' },
+        { type: 'RANK_UP', keyword: '매장시트지', rank: 5.2, impressions: 6, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '상위 노출 유지 및 SEO 태그 최적화' },
         { type: 'RANK_UP', keyword: '대형스티커제작', rank: 4.8, impressions: 6, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: 'SEO 상품명에 [대형] 키워드 반영 완료' },
         { type: 'RANK_UP', keyword: '시트지주문제작', rank: 2.2, impressions: 5, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '상위권(2.2위) 안정적 노출' },
         { type: 'RANK_UP', keyword: '합성지', rank: 2.0, impressions: 4, clicks: 0, ctr: 0.0, avgCpc: 0, cost: 0, action: '재질 타깃 키워드 상위 유지' },
@@ -1037,7 +1045,8 @@
             targetId: p.targetId || def.targetId || '운영중',
             category: p.category || def.category || '',
             price: p.price ?? def.price ?? 1000,
-            discountPrice: p.discountPrice ?? p.finalPrice ?? def.discountPrice ?? 900,
+            discountPrice: p.discountPrice ?? p.finalPrice ?? p.price ?? def.discountPrice ?? 1000,
+            sellerDiscount: p.sellerDiscount ?? 0,
             adStatus: p.adStatus || p.status || def.adStatus || '운영중',
             keywordMode: p.keywordMode || def.keywordMode || '자동',
             oldName: p.oldName || p.originalName || def.oldName || '',
@@ -1280,8 +1289,8 @@
             <div>
               <span class="badge badge-green">${p.adStatus || '운영중'}</span>
               <span class="badge badge-blue">상품번호: ${p.productNo}</span>
-              <span class="badge badge-purple">즉시할인 100원 + 구매자쿠폰 ON</span>
-              <span style="font-size:0.8rem; color:var(--muted); margin-left:6px;">${p.category} | 판매가 ${fmt(p.price)}원 (할인가 ${fmt(p.discountPrice)}원)</span>
+              <span class="badge badge-purple">할인 미적용 (1,000원 단가 수량 결제 방식 유지)</span>
+              <span style="font-size:0.8rem; color:var(--muted); margin-left:6px;">${p.category} | 판매가 ${fmt(p.price)}원 (할인 미적용 · 정가 결제 유지)</span>
             </div>
             <div style="display:flex; gap:6px; flex-wrap:wrap;">
               <button class="btn-sm btn-primary" onclick="copyProductSeoName(${idx})">📋 SEO 상품명 복사</button>
@@ -1457,7 +1466,7 @@
       const grade = score >= 90 ? 'S등급 (최상위 노출 최적화 완료)' : (score >= 70 ? 'A등급 (양호)' : 'B등급 (추가 보완 권장)');
       document.getElementById('qualityScoreBox').innerHTML = `
         <h4>현재 주누디자인 11번가 스토어 품질지수 진단: <span style="color:#34d399;">${score}점 / 100점 (${grade})</span></h4>
-        <p style="margin-top:4px;">구매자 쿠폰(11번가 100% 지원) + 100원 즉시할인 + 제외키워드 9종 + 검색 250원/추천 90원 이원화가 모두 반영되어 동일 입찰가 대비 최고 효율로 노출됩니다.</p>
+        <p style="margin-top:4px;">전 상품(8종) SEO 상품명·검색태그 20개 + 제외키워드 9종 + 검색 250원/추천 90원 이원화 + 1,000원 단가 수량 결제 방식 유지가 모두 반영되어 최고 효율로 운영됩니다.</p>
       `;
     }
 
